@@ -3,11 +3,10 @@ import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
-import { getServerStore } from '../store'
 
-export const render = (req, routes) => {
+export const render = (req, store, routes) => {
   const content = ReactDOMServer.renderToString((
-    <Provider store={getServerStore()}>
+    <Provider store={store}>
       <StaticRouter location={req.url} context={{}}>
         <div>
           {renderRoutes(routes)}
@@ -23,6 +22,12 @@ export const render = (req, routes) => {
       <body>
         <div id="root">${content}</div>
       </body>
+      <script >
+        window.context = {
+          state: ${JSON.stringify(store.getState())}
+        }
+      </script>
+      <script src="/index.js"></script>
     </html>
   `
 }
