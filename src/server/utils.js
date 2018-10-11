@@ -22,7 +22,7 @@ export const render = (req, store, routes) => {
       <body>
         <div id="root">${content}</div>
       </body>
-      <script >
+      <script>
         window.context = {
           state: ${JSON.stringify(store.getState())}
         }

@@ -6,7 +6,7 @@ import { render } from './utils'
 import routes from '../Routes' 
 import { matchRoutes } from 'react-router-config'
 import { getServerStore } from '../store'
-
+import proxy from 'koa2-simple-proxy'
 
 const app = new Koa()
 const router = new Router()
@@ -14,8 +14,11 @@ const router = new Router()
 // 静态资源
 app.use(staticServer('public'))
 
+// 转发
+app.use(proxy('/api', 'http://47.95.113.63/ssr/api'));
+
 router.get('*', async (ctx) => {
-  const store = getServerStore()
+  const store = getServerStore(ctx.request)
   const promises = []
   // store中填充什么数据根据当前路由去加载
   const matchedRoutes = matchRoutes(routes, ctx.request.url)

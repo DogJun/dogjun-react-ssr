@@ -6,7 +6,6 @@ const changeList = list => ({
 })
 
 export const fetchHomeList = () => {
-  console.log('fetchHomeList')
   return (dispatch, getState, axiosInstance) => {
     return axiosInstance.get('/api/news.json?secret=D37msjPeC3')
       .then(res => {
