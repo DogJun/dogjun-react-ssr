@@ -28,13 +28,25 @@ router.get('*', async (ctx) => {
     }
   })
   await Promise.all(promises)
-  ctx.body = render(ctx.request, store, routes)
+  const context = {
+    css: []
+  }
+  const html = render(ctx.request, store, routes, context)
+  if (context.action === 'REPLACE') {
+    ctx.status = 301
+    ctx.redirect(context.url)
+  } else if (context.notFound) {
+    ctx.status = 404
+    ctx.body = html
+  } else {
+    ctx.body = html
+  }
 })
 
 app
   .use(router.routes())
   .use(router.allowedMethods())
 
-app.listen(3000, () => {
-  console.log('server is running at http://localhost:3000')
+app.listen(8080, () => {
+  console.log('server is running at http://localhost:8080')
 })

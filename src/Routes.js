@@ -1,6 +1,7 @@
 import App from './App'
 import Home from './containers/Home'
-import Login from './containers/Login'
+import Translation from './containers/Translation'
+import NotFound from './containers/NotFound'
 
 export default [
   {
@@ -15,8 +16,12 @@ export default [
         loadData: Home.loadData
       },
       {
-        path: '/login',
-        component: Login
+        path: '/translation',
+        component: Translation,
+        loadData: Translation.loadData
+      },
+      {
+        component: NotFound
       }
     ]
   }
