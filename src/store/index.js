@@ -19,6 +19,6 @@ export const getServerStore = (req) => {
 
 export const getClientStore = () => {
   // 取到服务端渲染的store，作为初始值，保证服务端渲染和客户端渲染的store一致
-  const defaultStore = window.context.state
+  const defaultStore = window.context ? window.context.state : {}
   return createStore(reducer, defaultStore, applyMiddleware(thunk.withExtraArgument(clientAxios)))
 }

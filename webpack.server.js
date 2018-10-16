@@ -17,12 +17,6 @@ const serverConfig = {
         test: /\.less$/,
         use: [
           'isomorphic-style-loader',
-          // {
-          //   loader: 'isomorphic-style-loader',
-          //   options: {
-          //     singleton: true
-          //   }
-          // },
           {
             loader: 'css-loader',
             options: {

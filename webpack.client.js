@@ -14,12 +14,6 @@ const clientConfig = {
         test: /\.less$/,
         use: [
           'style-loader',
-          // {
-          //   loader: 'style-loader',
-          //   options: {
-          //     singleton: true
-          //   }
-          // },
           {
             loader: 'css-loader',
             options: {
